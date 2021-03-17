@@ -1,15 +1,20 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import dao.CotationDao;
 
@@ -23,43 +28,41 @@ public class DollarServlet extends HttpServlet {
     public DollarServlet() {
        this.cotationDao = new CotationDao();
     }
-
+    
+    private static HttpURLConnection connection;
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		try{
-			URL url = new URL("https://economia.awesomeapi.com.br/json/all");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			if (conn.getResponseCode() != 200) {
-				System.out.print("deu erro... HTTP error code : " + conn.getResponseCode());
-			}
+		String sURL = "https://economia.awesomeapi.com.br/json/all"; //just a string
 
-			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+	    // Connect to the URL using java's native library
+	    URL url = new URL(sURL);
+	    URLConnection json = url.openConnection();
+	    json.connect();
 
-			String output,json="";
-			while ((output = br.readLine()) != null) {
-				json+= output;
-			}
-			response.getWriter().append(json);
-			conn.disconnect();
+	    // Convert to a JSON object to print data
+	    JsonParser jp = new JsonParser(); //from gson
+	    JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent())); //Convert the input stream to a json element
+	    JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object. 
+	    JsonElement usd =    rootobj;
+		response.getWriter().append(usd+"");
+		
 			
-			//Cotation newCotation = new Cotation(name);
-            //cotationDao.store(newCotation);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                               
+
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 	}
 
 }
