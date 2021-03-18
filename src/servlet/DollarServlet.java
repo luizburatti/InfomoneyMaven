@@ -44,12 +44,17 @@ public class DollarServlet extends HttpServlet {
 	    JsonParser jp = new JsonParser(); //from gson
 	    JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent())); //Convert the input stream to a json element
 	    JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object. 
-	    JsonElement usd =    rootobj;
-		response.getWriter().append(usd+"");
-		
-			
-		
-		
+	    JsonElement codigo = rootobj.get("USD"); // Get value by code name
+	    
+	    //Get values by name from CODIGO 
+	    JsonElement name = ((JsonObject) codigo).get("name");
+	    JsonElement price = ((JsonObject) codigo).get("high");
+	    JsonElement buying = ((JsonObject) codigo).get("bid");
+	    JsonElement selling = ((JsonObject) codigo).get("ask");
+	    JsonElement variation_high = ((JsonObject) codigo).get("high");
+	    JsonElement variation_low = ((JsonObject) codigo).get("low");
+	    JsonElement date = ((JsonObject) codigo).get("create_date");
+		response.getWriter().append(codigo+""+ name + price + buying + selling + variation_high + variation_low + date);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

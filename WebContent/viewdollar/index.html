@@ -17,6 +17,7 @@
 	
 	
 	<div id="append"></div>
+	<div id="grafico"></div>
 	<script>
 	
 	
@@ -26,6 +27,8 @@
 		url: "http://localhost:8080/infomoney/viewdollar/dollar",
 		dataYpe: "JSON",
 		success: function(data){
+			$("#append").append(data)
+			$("#grafico").append(data)
 			console.log(data);
 		}
 		 
