@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import dao.CotationDao;
+import entity.Cotation;
 
 
 @WebServlet(name = "dollar", urlPatterns = { "/viewdollar/dollar" })
@@ -33,6 +37,10 @@ public class DollarServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String sURL = "https://economia.awesomeapi.com.br/json/all"; //just a string
 
 	    // Connect to the URL using java's native library
@@ -44,20 +52,40 @@ public class DollarServlet extends HttpServlet {
 	    JsonParser jp = new JsonParser(); //from gson
 	    JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent())); //Convert the input stream to a json element
 	    JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object. 
-	    JsonElement codigo = rootobj.get("USD"); // Get value by code name
+	    JsonElement code = rootobj.get("USD"); // Get value by code name	
 	    
 	    //Get values by name from CODIGO 
-	    JsonElement name = ((JsonObject) codigo).get("name");
-	    JsonElement price = ((JsonObject) codigo).get("high");
-	    JsonElement buying = ((JsonObject) codigo).get("bid");
-	    JsonElement selling = ((JsonObject) codigo).get("ask");
-	    JsonElement variation_high = ((JsonObject) codigo).get("high");
-	    JsonElement variation_low = ((JsonObject) codigo).get("low");
-	    JsonElement date = ((JsonObject) codigo).get("create_date");
-		response.getWriter().append(codigo+""+ name + price + buying + selling + variation_high + variation_low + date);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    JsonElement codein = ((JsonObject) code).get("code");
+		JsonElement name = ((JsonObject) code).get("name");
+	    JsonElement price = ((JsonObject) code).get("high");
+	    JsonElement buying = ((JsonObject) code).get("bid");
+	    JsonElement selling = ((JsonObject) code).get("ask");
+	    JsonElement variation_high = ((JsonObject) code).get("high");
+	    JsonElement variation_low = ((JsonObject) code).get("low");
+	    JsonElement date = ((JsonObject) code).get("create_date");
+	    
+	    //Convert values to String 
+	    String getcodein = codein.toString();
+	    String getname = name.toString();
+	    String getprice = price.toString();
+	    String getbuying = buying.toString();
+	    String getselling = selling.toString();
+	    String getvariation_high = variation_high.toString();
+	    String getvariation_low = variation_low.toString();
+	    
+	    Cotation newCotation = new Cotation(getcodein, getname, getprice,  getbuying, getselling, getvariation_high , getvariation_low);
+       cotationDao.store(newCotation);
+        
+        
+//		  JsonElement name = ((JsonObject) code).get("name");
+//		    JsonElement price = ((JsonObject) code).get("high");
+//		    JsonElement buying = ((JsonObject) code).get("bid");
+//		    JsonElement selling = ((JsonObject) code).get("ask");
+//		    JsonElement variation_high = ((JsonObject) code).get("high");
+//		    JsonElement variation_low = ((JsonObject) code).get("low");
+//		    JsonElement date = ((JsonObject) code).get("create_date");
+	    
+	    //response.getWriter().append(code+""+ name + price + buying + selling + variation_high + variation_low + date);
 
 	}
 
@@ -65,8 +93,6 @@ public class DollarServlet extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		
 	}
 

@@ -1,19 +1,13 @@
-use infomoney;
-create table cotation(
-id int primary key auto_increment,
-name varchar(255)
-);
 
 create table values_cotation(
 id int primary key auto_increment,
-price float,
-buying float,
-selling float,
-variation_low float,
-variation_high float,
-date date, 
-cotation_id int,
-foreign key (cotation_id) references cotation(id)
+code varchar(255),
+name varchar(255),
+price varchar(255),
+buying varchar(255),
+selling varchar(255),
+variation_low varchar(255),
+variation_high varchar(255)
 );
 
 create table user(
@@ -38,4 +32,6 @@ values_cotation_id int,
 foreign key (values_cotation_id) references values_cotation(id), 
 amount float,
 date date
-)
+);
+use infomoney;
+alter table values_cotation drop column cotation_id

@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,10 +13,10 @@ import entity.Cotation;
 
 public class CotationDao extends Dao{
 	
-	private static final String INSERT = "INSERT INTO COTATION (NAME) VALUES (?)";
-	private static final String SELECT = "SELECET * FROM COTATION";
-	private static final String SELECTID = "SELECET * FROM COTATION WHERE ID = ?";
-	private static final String DELETE = "DELETE FROM COTATION WHERE ID = ?";
+	private static final String INSERT = "INSERT INTO VALUES_COTATION (CODE, NAME, PRICE, BUYING, SELLING, VARIATION_LOW, VARIATION_HIGH) VALUES (?,?,?,?,?,?,?)";
+	private static final String SELECT = "SELECET * FROM VALUES_COTATION";
+	private static final String SELECTCODE = "SELECET * FROM VALUES_COTATION WHERE CODE = ?";
+	private static final String DELETE = "DELETE FROM VALUES_COTATION WHERE ID = ?";
 
 	 
 	//Salva no banco
@@ -23,7 +24,13 @@ public class CotationDao extends Dao{
 
 		try (Connection connection = this.conectar();
 			PreparedStatement pst = connection.prepareStatement(INSERT);) {
-			pst.setString(1, cotation.getName());
+			pst.setString(1, cotation.getCode());
+			pst.setString(2, cotation.getName());
+			pst.setString(3, cotation.getPrice());
+			pst.setString(4, cotation.getBuying());
+			pst.setString(5, cotation.getSelling());
+			pst.setString(6, cotation.getVariation_high());
+			pst.setString(7, cotation.getVariation_high());
 			pst.executeUpdate();
 			
 			System.out.println("Salvou");
@@ -40,7 +47,7 @@ public class CotationDao extends Dao{
 		Cotation cotation = null;
 		
 		try(Connection connection = this.conectar();
-				PreparedStatement pst = connection.prepareStatement(SELECTID);)
+				PreparedStatement pst = connection.prepareStatement(SELECTCODE);)
 		{
 			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();
