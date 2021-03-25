@@ -1,8 +1,8 @@
-//package entity;
+package entity;
 //
 //
 //
-//public class Cotation {
+public class Cotation {
 //
 //	private int id;
 //	private String code;
@@ -88,4 +88,4 @@
 //	
 //	
 //	
-//}
+}

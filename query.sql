@@ -46,13 +46,14 @@ create table Moedas(
 code VARCHAR(255),
 codein VARCHAR(255),
 name VARCHAR(255),
-high VARCHAR(255),
-low VARCHAR(255),
-varBid VARCHAR(255),
-ask VARCHAR(255),
-pctChange VARCHAR(255),
-bid VARCHAR(255),
-timestamp VARCHAR(255),
+high float,
+low float,
+varBid float,
+ask float,
+pctChange float,
+bid float,
+timestamp int,
 create_date VARCHAR(255)	
 );
-select * from Moedas;
+
+select * from Moedas where create_date < '2021-03-23 18:53:45';

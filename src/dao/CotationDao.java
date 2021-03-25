@@ -27,13 +27,13 @@ public class CotationDao extends Dao{
 			pst.setString(1, cotation.getCode());
 			pst.setString(2, cotation.getCodein());
 			pst.setString(3, cotation.getName());
-			pst.setString(4, cotation.getHigh());
-			pst.setString(5, cotation.getLow());
-			pst.setString(6, cotation.getVarBid());
-			pst.setString(7, cotation.getPctChange());
-			pst.setString(8, cotation.getBid());
-			pst.setString(9, cotation.getAsk());
-			pst.setString(10, cotation.getTimestamp());
+			pst.setFloat(4, cotation.getHigh());
+			pst.setFloat(5, cotation.getLow());
+			pst.setFloat(6, cotation.getVarBid());
+			pst.setFloat(7, cotation.getPctChange());
+			pst.setFloat(8, cotation.getBid());
+			pst.setFloat(9, cotation.getAsk());
+			pst.setLong(10, cotation.getTimestamp());
 			pst.setString(11, cotation.getCreate_date());
 			pst.executeUpdate();	
 			
