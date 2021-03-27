@@ -41,8 +41,9 @@ alter table values_cotation drop column cotation_id;
 select * from values_cotation;
 select * from values_cotation_user;
 
-
+use infomoney;
 create table Moedas(
+id int primary key auto_increment
 code VARCHAR(255),
 codein VARCHAR(255),
 name VARCHAR(255),

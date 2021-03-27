@@ -4,7 +4,7 @@ package entity;
 import lombok.Data;
 
 @Data
-public class Moedas {
+public class Moeda {
 	
 	//VARIAVEIS  QUE  IRAO  ARMAZENAR  OS DADOS DO ARQUIVO JSON.
 	private int id;
@@ -20,7 +20,7 @@ public class Moedas {
 	private long timestamp;
 	private String create_date;
 
-	public Moedas() {
+	public Moeda() {
 
 	}
 }

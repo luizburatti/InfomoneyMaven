@@ -21,7 +21,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import dao.CotationDao;
-import entity.Moedas;
+import entity.Moeda;
 
 
 @WebServlet(name = "dollar", urlPatterns = { "/viewdollar/dollar" })
@@ -37,6 +37,17 @@ public class DollarServlet extends HttpServlet {
 //    private static HttpURLConnection connection;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ArrayList<Moeda> listaMoeda = new CotationDao().selectAllCotation();
+		response.getWriter().append(listaMoeda+"");
+//		listaMoeda.forEach(moeda -> 
+//    	{
+//    		try {
+//				response.getWriter().append(moeda+"");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//    	});
 		
 	}
 
@@ -62,7 +73,7 @@ public class DollarServlet extends HttpServlet {
 	   
 	   JSONObject jsonObjectMoedas = new JSONObject(JsonConvertido);
 
-	   List<Moedas> listaDeMoedas = new ArrayList<Moedas>();
+	   List<Moeda> listaDeMoedas = new ArrayList<Moeda>();
 	   
 	   
 	   Iterator<String> iteratormoedas = jsonObjectMoedas.keys();
@@ -70,7 +81,7 @@ public class DollarServlet extends HttpServlet {
 		   
 	      JSONObject dadosMoedas = jsonObjectMoedas.getJSONObject(iteratormoedas.next());
 
-	      Moedas moedas = new Moedas();
+	      Moeda moedas = new Moeda();
 //	      moedas.setId(dadosMoedas.getInt("id"));
 	      moedas.setCode(dadosMoedas.getString("code"));
 	      moedas.setCodein(dadosMoedas.getString("codein"));

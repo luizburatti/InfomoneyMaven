@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.Dao;
-import entity.Moedas;
+import entity.Moeda;
 
 public class CotationDao extends Dao{
 	
 	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,high,low,varBid,ask,pctChange,bid,timestamp,create_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String SELECT = "SELECET * FROM VALUES_COTATION";
-	private static final String SELECTCODE = "SELECET * FROM VALUES_COTATION WHERE CODE = ?";
-	private static final String DELETE = "DELETE FROM VALUES_COTATION WHERE ID = ?";
+	private static final String SELECT = "SELECT * FROM Moedas";
+	private static final String SELECTCODE = "SELECET * FROM Moedas WHERE CODE = ?";
+	private static final String DELETE = "DELETE FROM Moedas WHERE ID = ?";
 
 	 
 	//Salva no banco
-	public void store(Moedas cotation){
+	public void store(Moeda cotation){
 
 		try (Connection connection = this.conectar();
 			PreparedStatement pst = connection.prepareStatement(INSERT);) {
@@ -47,8 +47,8 @@ public class CotationDao extends Dao{
 	}
 	
 	//Select pela id
-	public Moedas selectCotation(int id) {
-		Moedas cotation = null;
+	public Moeda selectCotation(int id) {
+		Moeda cotation = null;
 		
 		try(Connection connection = this.conectar();
 				PreparedStatement pst = connection.prepareStatement(SELECTCODE);)
@@ -58,9 +58,19 @@ public class CotationDao extends Dao{
 			
 			while(rs.next())
 			{
-				cotation = new Moedas();					
+				cotation = new Moeda();					
 				cotation.setId(rs.getInt("ID"));
-				cotation.setName(rs.getString("NOME"));
+				cotation.setCode(rs.getString("CODE"));
+				cotation.setCodein(rs.getString("CODEIN"));
+				cotation.setName(rs.getString("NAME"));
+				cotation.setHigh(rs.getFloat("HIGH"));
+				cotation.setLow(rs.getFloat("LOW"));
+				cotation.setVarBid(rs.getFloat("VARBID"));
+				cotation.setAsk(rs.getFloat("ASK"));
+				cotation.setPctChange(rs.getFloat("PCTCHANGE"));
+				cotation.setBid(rs.getFloat("BID"));
+				cotation.setTimestamp(rs.getLong("TIMESTAMP"));
+				cotation.setCreate_date(rs.getString("CREATE_DATE"));
 			}		
 			
 		}
@@ -73,9 +83,9 @@ public class CotationDao extends Dao{
 	
 	//list All
 	
-	public List<Moedas> selectAllCotation() {
-		List<Moedas> listCotation = new ArrayList<Moedas>();
+	public ArrayList<Moeda> selectAllCotation() {
 		
+		ArrayList<Moeda> listMoeda = new ArrayList<Moeda>();
 		try(Connection connection = this.conectar();
 				PreparedStatement pst = connection.prepareStatement(SELECT);)
 		{
@@ -83,9 +93,20 @@ public class CotationDao extends Dao{
 			
 			while(rs.next())
 			{
-				Moedas cotation = new Moedas();					
+				Moeda cotation = new Moeda();					
 				cotation.setId(rs.getInt("ID"));
-				cotation.setName(rs.getString("NOME"));
+				cotation.setCode(rs.getString("CODE"));
+				cotation.setCodein(rs.getString("CODEIN"));
+				cotation.setName(rs.getString("NAME"));
+				cotation.setHigh(rs.getFloat("HIGH"));
+				cotation.setLow(rs.getFloat("LOW"));
+				cotation.setVarBid(rs.getFloat("VARBID"));
+				cotation.setAsk(rs.getFloat("ASK"));
+				cotation.setPctChange(rs.getFloat("PCTCHANGE"));
+				cotation.setBid(rs.getFloat("BID"));
+				cotation.setTimestamp(rs.getLong("TIMESTAMP"));
+				cotation.setCreate_date(rs.getString("CREATE_DATE"));
+				listMoeda.add(cotation);
 			}		
 			
 		}
@@ -94,11 +115,12 @@ public class CotationDao extends Dao{
 			e.printStackTrace();
 		}
 		
-		return listCotation;
+		return listMoeda;
+		
 	}
 
 	//Delete
-	public void deleta(Moedas cotation)
+	public void deleta(Moeda cotation)
 	{
 		try (Connection connection = this.conectar();
 			PreparedStatement pst = connection.prepareStatement(DELETE);)
