@@ -25,7 +25,7 @@ ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("teste");
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="/infomoney/viewdollar/index.html" class="nav-link">Dashboard</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -41,7 +41,7 @@ ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("teste");
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/infomoney/viewdollar/index.html" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -130,9 +130,9 @@ ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("teste");
 			</div>
 		</div>
 	</div>
-	</div>
-	<form action="index.html">
-		<input class="btn btn-info" type="submit" value="voltar">
+	<form action="dollar" method="POST">
+	<button class="btn btn-danger" type="submit">Atualizar valores</button>
 	</form>
+	</div>
 </body>
 </html>

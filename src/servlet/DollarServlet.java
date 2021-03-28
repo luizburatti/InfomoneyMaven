@@ -95,6 +95,8 @@ public class DollarServlet extends HttpServlet {
 	      listaDeMoedas.add(moedas);
 	      cotationDao.store(moedas);
 	   }  
+	   
+	   RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");
 	}
 	
 	
