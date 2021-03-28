@@ -12,10 +12,7 @@ import entity.Moeda;
 public class CotationDao extends Dao{
 	
 	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,high,low,varBid,ask,pctChange,bid,timestamp,create_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String SELECT = "SELECT * FROM Moedas";
-
-
-
+	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 15) SUB ORDER BY ID ASC";
 	 
 	//Salva no banco
 	public void store(Moeda cotation){
