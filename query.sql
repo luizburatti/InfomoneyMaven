@@ -43,7 +43,7 @@ select * from values_cotation_user;
 
 use infomoney;
 create table Moedas(
-id int primary key auto_increment
+id int primary key auto_increment,
 code VARCHAR(255),
 codein VARCHAR(255),
 name VARCHAR(255),
@@ -57,4 +57,6 @@ timestamp int,
 create_date VARCHAR(255)	
 );
 
-select * from Moedas where create_date < '2021-03-23 18:53:45';
+select * from Moedas where codein = "BRLT";
+
+SELECT * FROM MOEDAS;
