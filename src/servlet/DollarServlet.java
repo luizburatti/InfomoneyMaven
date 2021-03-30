@@ -41,12 +41,15 @@ public class DollarServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Moeda> lista = cotationDao.selectAllCotation();
+		request.setAttribute("listaTodas", lista);
 		
-		request.setAttribute("teste", lista);
+		ArrayList<Moeda> umaMoeda = cotationDao.selectOneCotation();
+		request.setAttribute("umaMoeda", umaMoeda);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");
 		rd.forward(request, response);
-
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sURL = "https://economia.awesomeapi.com.br/json/all"; //just a string

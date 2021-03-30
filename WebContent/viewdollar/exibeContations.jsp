@@ -3,7 +3,8 @@
 <%@ page import="entity.Moeda"%>
 <%@ page import="java.util.ArrayList"%>
 <%
-ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("teste");
+ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("listaTodas");
+ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -160,19 +161,19 @@ ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("teste");
 							</thead>
 							<tbody>
 								<%
-								for (int i = 0; i < lista.size(); i++) {
+								for (int i = 0; i < umaMoeda.size(); i++) {
 								%>
 								<tr>
-									<td><%=lista.get(i).getId()%></td>
-									<td><%=lista.get(i).getCode()%></td>
-									<td><%=lista.get(i).getCodein()%></td>
-									<td><%=lista.get(i).getName()%></td>
-									<td><%=lista.get(i).getHigh()%></td>
-									<td><%=lista.get(i).getLow()%></td>
-									<td><%=lista.get(i).getVarBid()%></td>
-									<td><%=lista.get(i).getAsk()%></td>
-									<td><%=lista.get(i).getPctChange()%></td>
-									<td><%=lista.get(i).getBid()%></td>
+									<td><%=umaMoeda.get(i).getId()%></td>
+									<td><%=umaMoeda.get(i).getCode()%></td>
+									<td><%=umaMoeda.get(i).getCodein()%></td>
+									<td><%=umaMoeda.get(i).getName()%></td>
+									<td><%=umaMoeda.get(i).getHigh()%></td>
+									<td><%=umaMoeda.get(i).getLow()%></td>
+									<td><%=umaMoeda.get(i).getVarBid()%></td>
+									<td><%=umaMoeda.get(i).getAsk()%></td>
+									<td><%=umaMoeda.get(i).getPctChange()%></td>
+									<td><%=umaMoeda.get(i).getBid()%></td>
 								</tr>
 								<%
 								}
