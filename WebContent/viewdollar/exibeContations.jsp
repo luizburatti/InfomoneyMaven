@@ -28,15 +28,21 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 	crossorigin="anonymous"></script>
 
 </head>
+
+<style type="text/css">
+.BT {
+	height: 50px;
+	width: 200px;
+}
+</style>
+
 <body>
- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a>Cotação</a>
-      </li>
-    </ul>
-  </nav>
+	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+		<!-- Left navbar links -->
+		<ul class="navbar-nav">
+			<li class="nav-item d-none d-sm-inline-block"><a>Cotação</a></li>
+		</ul>
+	</nav>
 	<aside class="main-sidebar sidebar-dark-primary elevation-4">
 		<div class="sidebar">
 			<nav class="mt-2">
@@ -97,53 +103,55 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 				</div>
 			</div>
 			<div class="col-lg-1">
-			<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Franco SuÃ­Ã§o</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Peso Argentino</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Euro</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">DÃ³lar Comercial</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">DÃ³lar Canadense</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">DÃ³lar Turismo</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Bitcoin</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">DÃ³lar Australiano</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Novo Shekel Israelense</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Iene JaponÃªs</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Libra Esterlina</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Ripple</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Ethereum</button>
-				<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#modal-xl">Litecoin</button>
+				<button type="button" id="CHF" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Franco SuÃ­Ã§o</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Peso Argentino</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Euro</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">DÃ³lar Comercial</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">DÃ³lar Canadense</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">DÃ³lar Turismo</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Bitcoin</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">DÃ³lar Australiano</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Novo Shekel Israelense</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Iene JaponÃªs</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Libra Esterlina</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Ripple</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Ethereum</button>
+				<button type="button" class="btn btn-default BT" data-toggle="modal"
+					data-target="#modal-xl">Litecoin</button>
 			</div>
-			
-			
-			
+
+
+
 		</div>
 		<form action="dollar" method="POST">
 			<button class="btn btn-danger" type="submit">Atualizar
 				valores</button>
 		</form>
-		<div class="modal fade" id="modal-xl" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Dólar</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="card-body table-responsive p-0" style="height: 790px;">
+		<div class="modal fade" id="modal-xl" style="display: none;"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Dólar</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="card-body table-responsive p-0" style="height: 790px;">
 						<table class="table table-head-fixed text-nowrap">
 							<thead>
 								<tr>
@@ -182,14 +190,14 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 							</tbody>
 						</table>
 					</div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
+					<div class="modal-footer justify-content-between">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 	</div>
 </body>
 </html>
