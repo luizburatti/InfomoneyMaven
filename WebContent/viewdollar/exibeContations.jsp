@@ -3,9 +3,12 @@
 <%@ page import="entity.Moeda"%>
 <%@ page import="java.util.ArrayList"%>
 <%
+
 ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("listaTodas");
 ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 %>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -27,28 +30,78 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
 
-</head>
-
 <style type="text/css">
-.BT {
-	height: 50px;
-	width: 200px;
+
+#content-tabble{
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 0.9em;
+min-width: 400px;
+overflow: hidden;
+border-radius: 5px 5px 0 0;
+box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+
+#content-tabble tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+#content-tabble tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+#content-tabble tbody tr:last-of-type {
+	border-bottom: 2px solid #009879;
+}
+
+#content-tabble tbody tr.active-row {
+	font-weight: bold;
+	color: Grey;
+}
+
+#BT{
+  height: 50px;
+  width: 200px;
+  background-clip: content-box;
+  color: gray;
+  border-radius: 5px;
+  border-bottom-left-radius: inherit;
+  font-size: 17px;
+  font-style: oblique;
+  overflow: hidden;
+border-radius: 5px 5px 0 0;
+box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+#content-tabble th{
+background-color:  red;
+font-size-adjust: none;
+}
+
+body h1{
+  font-style: italic;
+  font-size: 30px;
+
 }
 </style>
 
+</head>
 <body>
-	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-		<!-- Left navbar links -->
-		<ul class="navbar-nav">
-			<li class="nav-item d-none d-sm-inline-block"><a>Cotação</a></li>
-		</ul>
-	</nav>
+ <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item d-none d-sm-inline-block">
+        <h1>Cotação</h1>
+      </li>
+    </ul>
+  </nav>
 	<aside class="main-sidebar sidebar-dark-primary elevation-4">
 		<div class="sidebar">
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column"
 					data-widget="treeview" role="menu" data-accordion="false">
-					<li class="nav-item"><a href="#" class="nav-link"> <i
+					<li class="nav-item"><a href="http://localhost:8080/infomoney/viewdollar/Dashboard.jsp" class="nav-link"> <i
 							class="nav-icon fas fa-home"></i>
 							<p>Dashboard</p>
 					</a></li>
@@ -62,7 +115,7 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 				<div class="card">
 					<!-- /.card-header -->
 					<div class="card-body table-responsive p-0" style="height: 790px;">
-						<table class="table table-head-fixed text-nowrap">
+						<table class="table table-head-fixed text-nowrap" id = "content-tabble">
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -81,7 +134,7 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 								<%
 								for (int i = 0; i < lista.size(); i++) {
 								%>
-								<tr>
+								<tr class ="active-row">
 									<td><%=lista.get(i).getId()%></td>
 									<td><%=lista.get(i).getCode()%></td>
 									<td><%=lista.get(i).getCodein()%></td>
@@ -103,58 +156,52 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 				</div>
 			</div>
 			<div class="col-lg-1">
-				<button type="button" id="CHF" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Franco SuÃ­Ã§o</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Peso Argentino</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Euro</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">DÃ³lar Comercial</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">DÃ³lar Canadense</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">DÃ³lar Turismo</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Bitcoin</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">DÃ³lar Australiano</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Novo Shekel Israelense</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Iene JaponÃªs</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Libra Esterlina</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Ripple</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Ethereum</button>
-				<button type="button" class="btn btn-default BT" data-toggle="modal"
-					data-target="#modal-xl">Litecoin</button>
-			</div>
-
-
-
+			<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Franco Suiço</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Peso Argentino</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Euro</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Dolar Comercial</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Dolar Canadense</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Dolar Turismo</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Bitcoin</button>				
+				<button type="button" class="btn btn-default" id="BT" data-toggle="modal" data-target="#modal-xl">Dolar Australiano</button><button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Novo Shekel Israelense</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Iene Japonês</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Libra Esterlina</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Ripple</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Ethereum</button>
+				<button type="button" class="btn btn-default" id= "BT" data-toggle="modal"
+				data-target="#modal-xl">Litecoin</button>
+			</div>			
+			
 		</div>
 		<form action="dollar" method="POST">
-			<button class="btn btn-danger" type="submit">Atualizar
+			<button class="btn btn-danger"  type="submit">Atualizar
 				valores</button>
 		</form>
-		<div class="modal fade" id="modal-xl" style="display: none;"
-			aria-hidden="true">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Dólar</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="card-body table-responsive p-0" style="height: 790px;">
-						<table class="table table-head-fixed text-nowrap">
+		<div class="modal fade" id="modal-xl" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Dólar</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="card-body table-responsive p-0" style="height: 790px;">
+						<table class="table table-head-fixed text-nowrap" id = "content-tabble">
 							<thead>
-								<tr>
+								<tr class ="active-row">
 									<th>ID</th>
 									<th>CODE</th>
 									<th>CODEIN</th>
@@ -190,14 +237,14 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 							</tbody>
 						</table>
 					</div>
-					<div class="modal-footer justify-content-between">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
 	</div>
 </body>
 </html>
