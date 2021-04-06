@@ -99,7 +99,7 @@ public class DollarServlet extends HttpServlet {
 	      cotationDao.store(moedas);
 	   }  
 	   
-	   RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");
+	  
 	}
 	
 	
