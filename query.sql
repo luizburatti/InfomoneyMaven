@@ -57,6 +57,4 @@ timestamp int,
 create_date VARCHAR(255)	
 );
 
-select * from Moedas where codein = "BRLT";
-
-SELECT * FROM MOEDAS;
+alter table moedas add column cents float not null;

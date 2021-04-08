@@ -41,10 +41,7 @@ public class DollarServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostDollarServelet postDollarServelet = new PostDollarServelet();
-		postDollarServelet.findAll();
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");
-		rd.forward(request, response);
+		postDollarServelet.store();
 
 	}	
 

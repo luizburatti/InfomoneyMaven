@@ -11,7 +11,7 @@ import entity.Moeda;
 
 public class CotationDao extends Dao{
 	
-	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,high,low,varBid,ask,pctChange,bid,timestamp,create_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,high,low,varBid,ask,pctChange,bid,timestamp,create_date, cents) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 16) SUB ORDER BY ID ASC";
 	private static final String SELECTCODE = "SELECT * FROM Moedas WHERE CODE = 'EUR' ORDER BY ID DESC";
 	 
@@ -32,6 +32,7 @@ public class CotationDao extends Dao{
 			pst.setFloat(9, cotation.getAsk());
 			pst.setLong(10, cotation.getTimestamp());
 			pst.setString(11, cotation.getCreate_date());
+			pst.setFloat(12, cotation.getCents());
 			pst.executeUpdate();	
 			
 			System.out.println("Salvou");
