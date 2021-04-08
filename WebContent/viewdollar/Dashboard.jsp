@@ -68,7 +68,6 @@
 								title : 'Diferença  entre cotações MÁXIMO/MÍNIMO "Do dia" ',
 								width : 500,
 								height : 500,
-								legend : 'none'
 							};
 							var barchart = new google.visualization.BarChart(
 									document.getElementById('barchart_div'));
@@ -78,9 +77,8 @@
 					});
 </script>
 <style type="text/css">
-body {
-	background-color: black;
-}
+
+
 body h1 {
 	font-style: italic;
 	color: white;

@@ -9,41 +9,12 @@ import java.util.ArrayList;
 import connection.Dao;
 import entity.Moeda;
 
-public class CotationDao extends Dao{
+public class DashboardDao extends Dao{
 	
-	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,high,low,varBid,ask,pctChange,bid,timestamp,create_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 15) SUB ORDER BY ID ASC";
-	private static final String SELECTCODE = "SELECT * FROM MOEDAS where CODE = 'USD' ORDER BY ID DESC";//"SELECT * FROM Moedas WHERE CODE = 'EUR' ORDER BY ID DESC";
+	private static final String SELECTCODE = "SELECT * FROM MOEDAS where CODE = \"USD\" ORDER BY ID DESC LIMIT 2";//"SELECT * FROM Moedas WHERE CODE = 'EUR' ORDER BY ID DESC";
 	 
-	//Salva no banco
-	public void store(Moeda cotation){
-
-		try (Connection connection = this.conectar();
-			PreparedStatement pst = connection.prepareStatement(INSERT);) {
-		
-			pst.setString(1, cotation.getCode());
-			pst.setString(2, cotation.getCodein());
-			pst.setString(3, cotation.getName());
-			pst.setFloat(4, cotation.getHigh());
-			pst.setFloat(5, cotation.getLow());
-			pst.setFloat(6, cotation.getVarBid());
-			pst.setFloat(7, cotation.getPctChange());
-			pst.setFloat(8, cotation.getBid());
-			pst.setFloat(9, cotation.getAsk());
-			pst.setLong(10, cotation.getTimestamp());
-			pst.setString(11, cotation.getCreate_date());
-			pst.executeUpdate();	
-			
-			System.out.println("Salvou");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Não Salvou");
-		}
-
-	}
 	
-
 	public  ArrayList<Moeda> selectAllCotation() {
 		
 		ArrayList<Moeda> listMoeda = new ArrayList<Moeda>();
