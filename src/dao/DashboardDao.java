@@ -12,7 +12,7 @@ import entity.Moeda;
 public class DashboardDao extends Dao{
 	
 	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 15) SUB ORDER BY ID ASC";
-	private static final String SELECTCODE = "SELECT * FROM MOEDAS where CODE = \"USD\" ORDER BY ID DESC LIMIT 2";//"SELECT * FROM Moedas WHERE CODE = 'EUR' ORDER BY ID DESC";
+	private static final String SELECTCODE_DASH = "SELECT * FROM MOEDAS where CODE = \"USD\" ORDER BY ID DESC LIMIT 2";
 	 
 	
 	public  ArrayList<Moeda> selectAllCotation() {
@@ -57,7 +57,7 @@ public  ArrayList<Moeda> selectOneCotation() {
 		
 		ArrayList<Moeda> listOneMoeda = new ArrayList<Moeda>();
 		try(Connection connection = this.conectar();
-				PreparedStatement pst = connection.prepareStatement(SELECTCODE);)
+				PreparedStatement pst = connection.prepareStatement(SELECTCODE_DASH);)
 		{
 			ResultSet rs = pst.executeQuery();
 			
