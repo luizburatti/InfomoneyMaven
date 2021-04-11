@@ -31,14 +31,14 @@ public class DashboardDao extends Dao{
 				cotation.setCode(rs.getString("code"));
 				cotation.setCodein(rs.getString("codein"));
 				cotation.setName(rs.getString("name"));
-				cotation.setHigh(rs.getFloat("high"));
-				cotation.setLow(rs.getFloat("low"));
-				cotation.setVarBid(rs.getFloat("varBid"));
-				cotation.setPctChange(rs.getFloat("pctChange"));
-				cotation.setBid(rs.getFloat("bid"));
-				cotation.setAsk(rs.getFloat("ask"));
-				cotation.setTimestamp(rs.getLong("timestamp"));
-				cotation.setCreate_date(rs.getString("create_date"));	
+				cotation.setCompra(rs.getFloat("compra"));
+				cotation.setVenda(rs.getFloat("venda"));
+				cotation.setMaximo(rs.getFloat("maximo"));
+				cotation.setMinimo(rs.getFloat("minimo"));
+				cotation.setDiferenca_maxima_minima(rs.getFloat("diferenca_maxima_minima"));
+				cotation.setVariacao(rs.getFloat("variacao"));
+				cotation.setPorcentagem_de_variacao(rs.getFloat("porcentagem_de_variacao"));
+				cotation.setData_de_criacao(rs.getString("data_de_criacao"));	
 				
 				listMoeda.add (cotation);
 			}		
@@ -69,14 +69,14 @@ public  ArrayList<Moeda> selectOneCotation() {
 				cotation.setCode(rs.getString("code"));
 				cotation.setCodein(rs.getString("codein"));
 				cotation.setName(rs.getString("name"));
-				cotation.setHigh(rs.getFloat("high"));
-				cotation.setLow(rs.getFloat("low"));
-				cotation.setVarBid(rs.getFloat("varBid"));
-				cotation.setPctChange(rs.getFloat("pctChange"));
-				cotation.setBid(rs.getFloat("bid"));
-				cotation.setAsk(rs.getFloat("ask"));
-				cotation.setTimestamp(rs.getLong("timestamp"));
-				cotation.setCreate_date(rs.getString("create_date"));	
+				cotation.setCompra(rs.getFloat("compra"));
+				cotation.setVenda(rs.getFloat("venda"));
+				cotation.setMaximo(rs.getFloat("maximo"));
+				cotation.setMinimo(rs.getFloat("minimo"));
+				cotation.setDiferenca_maxima_minima(rs.getFloat("diferenca_maxima_minima"));
+				cotation.setVariacao(rs.getFloat("variacao"));
+				cotation.setPorcentagem_de_variacao(rs.getFloat("porcentagem_de_variacao"));
+				cotation.setData_de_criacao(rs.getString("data_de_criacao"));	
 				
 				listOneMoeda.add (cotation);
 			}		

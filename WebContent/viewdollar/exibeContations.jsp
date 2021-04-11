@@ -116,16 +116,16 @@ body h1 {
 							id="content-tabble">
 							<thead>
 								<tr>
-									<th>ID</th>
 									<th>CODE</th>
 									<th>CODEIN</th>
 									<th>NAME</th>
-									<th>HIGH</th>
-									<th>LOW</th>
-									<th>VARBID</th>
-									<th>ASK</th>
-									<th>PCTCHANGE</th>
-									<th>BID</th>
+									<th>COMPRA</th>
+									<th>Venda</th>
+									<th>Maximo</th>
+									<th>Minimo</th>
+									<th>Diferenca_maxima_minima</th>
+									<th>Variacao</th>
+									<th>Porcentagem_de_variacao</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -133,16 +133,16 @@ body h1 {
 								for (int i = 0; i < lista.size(); i++) {
 								%>
 								<tr class="active-row">
-									<td><%=lista.get(i).getId()%></td>
 									<td><%=lista.get(i).getCode()%></td>
 									<td><%=lista.get(i).getCodein()%></td>
 									<td><%=lista.get(i).getName()%></td>
-									<td><%=lista.get(i).getHigh()%></td>
-									<td><%=lista.get(i).getLow()%></td>
-									<td><%=lista.get(i).getVarBid()%></td>
-									<td><%=lista.get(i).getAsk()%></td>
-									<td><%=lista.get(i).getPctChange()%></td>
-									<td><%=lista.get(i).getBid()%></td>
+									<td><%=lista.get(i).getCompra()%></td>
+									<td><%=lista.get(i).getVenda()%></td>
+									<td><%=lista.get(i).getMaximo()%></td>
+									<td><%=lista.get(i).getMinimo()%></td>
+									<td><%=lista.get(i).getDiferenca_maxima_minima()%></td>
+									<td><%=lista.get(i).getVariacao()%></td>
+									<td><%=lista.get(i).getPorcentagem_de_variacao()%></td>
 								</tr>
 								<%
 								}
@@ -210,16 +210,16 @@ body h1 {
 							id="content-tabble">
 							<thead>
 								<tr class="active-row">
-									<th>ID</th>
 									<th>CODE</th>
 									<th>CODEIN</th>
 									<th>NAME</th>
-									<th>HIGH</th>
-									<th>LOW</th>
-									<th>VARBID</th>
-									<th>ASK</th>
-									<th>PCTCHANGE</th>
-									<th>BID</th>
+									<th>COMPRA</th>
+									<th>Venda</th>
+									<th>Maximo</th>
+									<th>Minimo</th>
+									<th>Diferenca_maxima_minima</th>
+									<th>Variacao</th>
+									<th>Porcentagem_de_variacao</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -227,16 +227,16 @@ body h1 {
 								for (int i = 0; i < umaMoeda.size(); i++) {
 								%>
 								<tr>
-									<td><%=umaMoeda.get(i).getId()%></td>
-									<td><%=umaMoeda.get(i).getCode()%></td>
-									<td><%=umaMoeda.get(i).getCodein()%></td>
-									<td><%=umaMoeda.get(i).getName()%></td>
-									<td><%=umaMoeda.get(i).getHigh()%></td>
-									<td><%=umaMoeda.get(i).getLow()%></td>
-									<td><%=umaMoeda.get(i).getVarBid()%></td>
-									<td><%=umaMoeda.get(i).getAsk()%></td>
-									<td><%=umaMoeda.get(i).getPctChange()%></td>
-									<td><%=umaMoeda.get(i).getBid()%></td>
+									<td><%=lista.get(i).getCode()%></td>
+									<td><%=lista.get(i).getCodein()%></td>
+									<td><%=lista.get(i).getName()%></td>
+									<td><%=lista.get(i).getCompra()%></td>
+									<td><%=lista.get(i).getVenda()%></td>
+									<td><%=lista.get(i).getMaximo()%></td>
+									<td><%=lista.get(i).getMinimo()%></td>
+									<td><%=lista.get(i).getDiferenca_maxima_minima()%></td>
+									<td><%=lista.get(i).getVariacao()%></td>
+									<td><%=lista.get(i).getPorcentagem_de_variacao()%></td>
 								</tr>
 								<%
 								}

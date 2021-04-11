@@ -57,15 +57,16 @@ public class PostDollarServelet {
 				moedas.setCode(dadosMoedas.getString("code"));
 				moedas.setCodein(dadosMoedas.getString("codein"));
 				moedas.setName(dadosMoedas.getString("name"));
-				moedas.setHigh(dadosMoedas.getFloat("high"));
-				moedas.setLow(dadosMoedas.getFloat("low"));
-				moedas.setVarBid(dadosMoedas.getFloat("varBid"));
-				moedas.setPctChange(dadosMoedas.getFloat("pctChange"));
-				moedas.setBid(dadosMoedas.getFloat("bid"));
-				moedas.setAsk(dadosMoedas.getFloat("ask"));
-				moedas.setTimestamp(dadosMoedas.getLong("timestamp"));
-				moedas.setCreate_date(dadosMoedas.getString("create_date"));
-				moedas.setCents(dadosMoedas.getFloat("high") - dadosMoedas.getFloat("low"));
+				moedas.setCompra(dadosMoedas.getFloat("bid"));
+				moedas.setVenda(dadosMoedas.getFloat("ask"));
+				moedas.setMaximo(dadosMoedas.getFloat("high"));
+				moedas.setMinimo(dadosMoedas.getFloat("low"));
+				moedas.setDiferenca_maxima_minima(dadosMoedas.getFloat("high") - dadosMoedas.getFloat("low"));
+				moedas.setVariacao(dadosMoedas.getFloat("varBid"));
+				moedas.setPorcentagem_de_variacao(dadosMoedas.getFloat("pctChange"));
+				moedas.setData_de_criacao(dadosMoedas.getString("create_date"));
+				
+				
 
 				listaDeMoedas.add(moedas);
 				cotationDao.store(moedas);
