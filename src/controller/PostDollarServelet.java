@@ -33,7 +33,7 @@ public class PostDollarServelet {
 
 			// Convert to a JSON object to print data
 			JsonParser jp = new JsonParser(); // from gson
-			JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent())); // Convert the input
+			JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent(), "UTF-8")); // Convert the input
 																									// stream
 																									// to a json element
 			JsonObject rootobj = root.getAsJsonObject(); // May be an array, may be an object.

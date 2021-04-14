@@ -12,7 +12,7 @@ import entity.Moeda;
 public class CotationDao extends Dao{
 	
 	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,compra,venda,maximo,minimo,diferenca_maxima_minima,variacao,porcentagem_de_variacao,data_de_criacao) VALUES (?,?,?,format(?,2),format(?,2),format(?,2),format(?,2),format(?,2),?,?,?)";
-	private static final String SELECT = "SELECT id,code,codein,name,compra,venda,maximo,minimo,diferenca_maxima_minima,variacao,porcentagem_de_variacao,data_de_criacao FROM Moedas ORDER BY ID DESC LIMIT 16";
+	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 16) SUB ORDER BY ID ASC";
 	private static final String SELECTCODE = "SELECT * FROM Moedas WHERE CODE = 'EUR' ORDER BY ID DESC";
 	 	
 	
