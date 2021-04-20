@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Moeda {
-	
-	//VARIAVEIS  QUE  IRAO  ARMAZENAR  OS DADOS DO ARQUIVO JSON.
+
+	// VARIAVEIS QUE IRAO ARMAZENAR OS DADOS DO ARQUIVO JSON.
 	private int id;
 	private String code;
 	private String codein;
@@ -17,8 +17,8 @@ public class Moeda {
 	private float variacao;
 	private float porcentagem_de_variacao;
 	private float diferenca_maxima_minima;
+	private float valor_convertido;
 	private String data_de_criacao;
-	
 	public int getId() {
 		return id;
 	}
@@ -85,6 +85,12 @@ public class Moeda {
 	public void setDiferenca_maxima_minima(float diferenca_maxima_minima) {
 		this.diferenca_maxima_minima = diferenca_maxima_minima;
 	}
+	public float getValor_convertido() {
+		return valor_convertido;
+	}
+	public void setValor_convertido(float valor_convertido) {
+		this.valor_convertido = valor_convertido;
+	}
 	public String getData_de_criacao() {
 		return data_de_criacao;
 	}
@@ -92,7 +98,8 @@ public class Moeda {
 		this.data_de_criacao = data_de_criacao;
 	}
 	public Moeda(int id, String code, String codein, String name, float compra, float venda, float maximo, float minimo,
-			float variacao, float porcentagem_de_variacao, float diferenca_maxima_minima, String data_de_criacao) {
+			float variacao, float porcentagem_de_variacao, float diferenca_maxima_minima, float valor_convertido,
+			String data_de_criacao) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -105,12 +112,13 @@ public class Moeda {
 		this.variacao = variacao;
 		this.porcentagem_de_variacao = porcentagem_de_variacao;
 		this.diferenca_maxima_minima = diferenca_maxima_minima;
+		this.valor_convertido = valor_convertido;
 		this.data_de_criacao = data_de_criacao;
 	}
 	public Moeda() {
 		super();
 	}
-	
 
+	
 	
 }

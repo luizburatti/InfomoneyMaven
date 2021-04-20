@@ -51,8 +51,10 @@ compra float,
 venda float,
 maximo float,
 minimo float,
+diferenca_maxima_minima float,
 variacao float,
 porcentagem_de_variacao float,
+valor_convertido float,
 create_date VARCHAR(255)	
 );
 

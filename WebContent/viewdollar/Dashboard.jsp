@@ -34,7 +34,8 @@
 							'packages' : [ 'corechart' ]
 						});
 						google.charts.setOnLoadCallback(function() {
-							drawChart(result), drawCurveTypes(result);
+							drawChart(result), drawCurveTypes(result),
+									drawChartPie(result);
 						});
 					}
 				});
@@ -89,6 +90,29 @@
 					chart.draw(dataLine, options);
 				}
 
+				function drawChartPie(result) {
+
+					var dataLine = new google.visualization.DataTable();
+					dataLine.addColumn('string', 'Name');
+					dataLine.addColumn('number', 'Valor Convertido');
+					var dataArray = [];
+					$.each(result, function(i, obj) {
+						dataArray.push([ obj.name, obj.valor_convertido, ]);
+					});
+					dataLine.addRows(dataArray);
+					
+					var options = {
+						pieSliceText : 'value-and-percentage',
+						title : 'My Daily Activities',
+						width : 800,
+						height : 500,
+					};
+
+					var chart = new google.visualization.PieChart(document
+							.getElementById('drawChartPie'));
+					chart.draw(dataLine, options);
+				}
+
 			});
 </script>
 <style type="text/css">
@@ -102,12 +126,9 @@ body h1 {
 <body>
 	<h1>Dashboard</h1>
 	<div class="col-lg-12">
-		<table class="columns">
-			<tr>
-				<td><div id="chart_div" style="border: 1px solid #ccc"></div></td>
-				<td><div id="drawCurve" style="border: 1px solid #ccc"></div></td>
-			</tr>
-		</table>
+		<div id="chart_div" style="border: 1px solid #ccc"></div>
+		<div id="drawCurve" style="border: 1px solid #ccc"></div>
+		<div id="drawChartPie" style="border: 1px solid #ccc"></div>
 	</div>
 	<a href="dollar"><button id="btn" type="button"
 			class="btn btn-danger">Voltar</button></a>

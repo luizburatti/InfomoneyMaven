@@ -64,6 +64,7 @@ public class PostDollarServelet {
 				moedas.setDiferenca_maxima_minima(dadosMoedas.getFloat("high") - dadosMoedas.getFloat("low"));
 				moedas.setVariacao(dadosMoedas.getFloat("varBid"));
 				moedas.setPorcentagem_de_variacao(dadosMoedas.getFloat("pctChange"));
+				moedas.setValor_convertido(1 / dadosMoedas.getFloat("bid"));
 				moedas.setData_de_criacao(dadosMoedas.getString("create_date"));
 				
 				

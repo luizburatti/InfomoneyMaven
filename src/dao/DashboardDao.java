@@ -34,6 +34,7 @@ public class DashboardDao extends Dao {
 				cotation.setDiferenca_maxima_minima(rs.getFloat("diferenca_maxima_minima"));
 				cotation.setVariacao(rs.getFloat("variacao"));
 				cotation.setPorcentagem_de_variacao(rs.getFloat("porcentagem_de_variacao"));
+				cotation.setValor_convertido(rs.getFloat("valor_convertido"));
 				cotation.setData_de_criacao(rs.getString("data_de_criacao"));
 
 				listMoeda.add(cotation);
@@ -68,6 +69,7 @@ public class DashboardDao extends Dao {
 				cotation.setDiferenca_maxima_minima(rs.getFloat("diferenca_maxima_minima"));
 				cotation.setVariacao(rs.getFloat("variacao"));
 				cotation.setPorcentagem_de_variacao(rs.getFloat("porcentagem_de_variacao"));
+				cotation.setValor_convertido(rs.getFloat("valor_convertido"));
 				cotation.setData_de_criacao(rs.getString("data_de_criacao"));
 
 				listOneMoeda.add(cotation);
