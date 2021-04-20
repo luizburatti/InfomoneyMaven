@@ -24,61 +24,74 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$.ajax({
-							url : "DASH",
-							dataTYPE : "JSON",
-							success : function(result) {
-								google.charts.load('current', {
-									'packages' : [ 'corechart' ]
-								});
-								google.charts.setOnLoadCallback(function() {
-									drawChart(result);
-								});
-							}
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "dashboard",
+					dataTYPE : "JSON",
+					success : function(result) {
+						google.charts.load('current', {
+							'packages' : [ 'corechart' ]
 						});
-
-						function drawChart(result) {
-
-							var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Name');
-							data.addColumn('number', 'High');
-							data.addColumn('number', 'Low');
-							var dataArray = [];
-							$.each(result,
-									function(i, obj) {
-										dataArray.push([ obj.name, obj.high,
-												obj.low ]);
-									});
-
-							data.addRows(dataArray);
-
-							var piechart_options = {
-								title : 'Maior e menor valores entre cotações atualmente.',
-								width : 500,
-								height : 500
-							};
-							var piechart = new google.visualization.PieChart(
-									document.getElementById('piechart_div'));
-							piechart.draw(data, piechart_options);
-
-							var barchart_options = {
-								title : 'Diferença  entre cotações MÁXIMO/MÍNIMO "Do dia" ',
-								width : 500,
-								height : 500,
-							};
-							var barchart = new google.visualization.BarChart(
-									document.getElementById('barchart_div'));
-							barchart.draw(data, barchart_options);
-						}
-
+						google.charts.setOnLoadCallback(function() {
+							drawChart(result), drawCurveTypes(result);
+						});
+					}
+				});
+				function drawChart(result) {
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Name');
+					data.addColumn('number', 'Maximo');
+					data.addColumn('number', 'Minimo');
+					var dataArray = [];
+					$.each(result, function(i, obj) {
+						dataArray.push([ obj.name, obj.maximo, obj.minimo ]);
 					});
+					data.addRows(dataArray);
+
+					var options = {
+						title : 'Diferença  entre cotações',
+						width : 800,
+						height : 500,
+					};
+					var chart = new google.visualization.ColumnChart(document
+							.getElementById('chart_div'));
+					chart.draw(data, options);
+				}
+
+				function drawCurveTypes(result) {
+					var dataLine = new google.visualization.DataTable();
+					dataLine.addColumn('string', 'Name');
+					dataLine.addColumn('number', 'Compra');
+					var dataArray = [];
+					$.each(result, function(i, obj) {
+						dataArray.push([ obj.name, obj.compra, ]);
+					});
+					dataLine.addRows(dataArray);
+					var options = {
+						width : 800,
+						height : 500,
+						hAxis : {
+							title : 'Time'
+						},
+						vAxis : {
+							title : 'Popularity'
+						},
+						series : {
+							00 : {
+								curveType : 'function'
+							}
+						}
+					};
+
+					var chart = new google.visualization.LineChart(document
+							.getElementById('drawCurve'));
+					chart.draw(dataLine, options);
+				}
+
+			});
 </script>
 <style type="text/css">
-
-
 body h1 {
 	font-style: italic;
 	color: white;
@@ -87,21 +100,16 @@ body h1 {
 </style>
 </head>
 <body>
-
 	<h1>Dashboard</h1>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<table class="columns">
-					<tr>
-						<td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
-						<td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
-					</tr>
-				</table>
-			</div>
-		</div>
+	<div class="col-lg-12">
+		<table class="columns">
+			<tr>
+				<td><div id="chart_div" style="border: 1px solid #ccc"></div></td>
+				<td><div id="drawCurve" style="border: 1px solid #ccc"></div></td>
+			</tr>
+		</table>
 	</div>
-	<a href="http://localhost:8081/infomoney/viewdollar/dollar"><button
-			id="btn" type="button" class="btn btn-danger">Voltar</button></a>
+	<a href="dollar"><button id="btn" type="button"
+			class="btn btn-danger">Voltar</button></a>
 </body>
 </html>

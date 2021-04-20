@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import dao.CotationDao;
 import dao.DashboardDao;
 import entity.Moeda;
 
-@WebServlet("/viewdollar/DASH")
+@WebServlet(name = "dashboard", urlPatterns = { "/viewdollar/dashboard" })
 public class GraficoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +27,7 @@ public class GraficoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<Moeda> lista = dashboardDao.selectOneCotation();
+		ArrayList<Moeda> lista = dashboardDao.selectAllCotation();
 		Gson gson = new Gson();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();

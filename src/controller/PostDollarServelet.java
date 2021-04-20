@@ -24,7 +24,7 @@ public class PostDollarServelet {
 		try {
 			CotationDao cotationDao = new CotationDao();
 
-			String sURL = "https://economia.awesomeapi.com.br/json/all"; // just a string
+			String sURL = "https://economia.awesomeapi.com.br/last/USD-BRLT,USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,ARS-BRL,JPY-BRL,CHF-BRL,AUD-BRL,CNY-BRL,ILS-BRL"; // just a string
 
 			// Connect to the URL using java's native library
 			URL url = new URL(sURL);

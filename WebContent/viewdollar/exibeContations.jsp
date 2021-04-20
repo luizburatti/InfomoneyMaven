@@ -98,7 +98,7 @@ body h1 {
 				<ul class="nav nav-pills nav-sidebar flex-column"
 					data-widget="treeview" role="menu" data-accordion="false">
 					<li class="nav-item"><a
-						href="http://localhost:8081/infomoney/viewdollar/Dashboard.jsp"
+						href="Dashboard.jsp"
 						class="nav-link"> <i class="nav-icon fas fa-home"></i>
 							<p>Dashboard</p>
 					</a></li>
@@ -117,15 +117,14 @@ body h1 {
 							<thead>
 								<tr>
 									<th>CODE</th>
-									<th>CODEIN</th>
 									<th>NAME</th>
 									<th>COMPRA</th>
 									<th>Venda</th>
 									<th>Maximo</th>
 									<th>Minimo</th>
-									<th>Diferenca_maxima_minima</th>
+									<th>Diferença</th>
 									<th>Variacao</th>
-									<th>Porcentagem_de_variacao</th>
+									<th>% Variacao</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -134,7 +133,6 @@ body h1 {
 								%>
 								<tr class="active-row">
 									<td><%=lista.get(i).getCode()%></td>
-									<td><%=lista.get(i).getCodein()%></td>
 									<td><%=lista.get(i).getName()%></td>
 									<td><%=lista.get(i).getCompra()%></td>
 									<td><%=lista.get(i).getVenda()%></td>
@@ -211,7 +209,6 @@ body h1 {
 							<thead>
 								<tr class="active-row">
 									<th>CODE</th>
-									<th>CODEIN</th>
 									<th>NAME</th>
 									<th>COMPRA</th>
 									<th>Venda</th>
@@ -228,7 +225,6 @@ body h1 {
 								%>
 								<tr>
 									<td><%=lista.get(i).getCode()%></td>
-									<td><%=lista.get(i).getCodein()%></td>
 									<td><%=lista.get(i).getName()%></td>
 									<td><%=lista.get(i).getCompra()%></td>
 									<td><%=lista.get(i).getVenda()%></td>
