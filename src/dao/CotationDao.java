@@ -11,9 +11,9 @@ import entity.Moeda;
 
 public class CotationDao extends Dao {
 
-	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,compra,venda,maximo,minimo,diferenca_maxima_minima,variacao,porcentagem_de_variacao,valor_convertido,data_de_criacao) VALUES (?,?,?,format(?,2),format(?,2),format(?,2),format(?,2),format(?,2),?,?,?,?)";
+	private static final String INSERT = "INSERT INTO Moedas (code,codein,name,compra,venda,maximo,minimo,diferenca_maxima_minima,variacao,porcentagem_de_variacao,valor_convertido,data_de_criacao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 11) SUB ORDER BY ID ASC";
-	private static final String SELECTCODE = "SELECT * FROM Moedas WHERE CODE = 'EUR' ORDER BY ID DESC";
+	private static final String SELECTCODE = "SELECT * FROM Moedas WHERE code = ?";
 
 	// Salva no banco
 	public void store(Moeda cotation) {
@@ -74,11 +74,12 @@ public class CotationDao extends Dao {
 
 	}
 
-	public ArrayList<Moeda> selectOneCotation() {
-
+	public ArrayList<Moeda> selectOneCotation(String code) {
 		ArrayList<Moeda> listOneMoeda = new ArrayList<Moeda>();
 		try (Connection connection = this.conectar();
 				PreparedStatement pst = connection.prepareStatement(SELECTCODE);) {
+			
+			pst.setString(1, code);
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
@@ -104,7 +105,7 @@ public class CotationDao extends Dao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return listOneMoeda;
 
 	}

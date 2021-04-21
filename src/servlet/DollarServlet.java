@@ -32,7 +32,10 @@ public class DollarServlet extends HttpServlet {
 		ArrayList<Moeda> lista = cotationDao.selectAllCotation();
 		request.setAttribute("listaTodas", lista);
 		
-		ArrayList<Moeda> umaMoeda = cotationDao.selectOneCotation();
+		String valor = request.getParameter("dolar");
+		System.out.println(valor);
+		
+		ArrayList<Moeda> umaMoeda = cotationDao.selectOneCotation("USD");
 		request.setAttribute("umaMoeda", umaMoeda);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");

@@ -4,7 +4,6 @@
 <%@ page import="java.util.ArrayList"%>
 <%
 ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("listaTodas");
-ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 %>
 
 
@@ -28,6 +27,8 @@ ArrayList<Moeda> umaMoeda = (ArrayList<Moeda>) request.getAttribute("umaMoeda");
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <style type="text/css">
 #content-tabble {
@@ -97,18 +98,17 @@ body h1 {
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column"
 					data-widget="treeview" role="menu" data-accordion="false">
-					<li class="nav-item"><a
-						href="Dashboard.jsp"
-						class="nav-link"> <i class="nav-icon fas fa-home"></i>
+					<li class="nav-item"><a href="Dashboard.jsp" class="nav-link">
+							<i class="nav-icon fas fa-home"></i>
 							<p>Dashboard</p>
 					</a></li>
 				</ul>
 			</nav>
 		</div>
 	</aside>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xl-11 ">
+			<div class="col-8" style="left: 400px">
 				<div class="card">
 					<!-- /.card-header -->
 					<div class="card-body table-responsive p-0" style="height: 790px;">
@@ -125,6 +125,7 @@ body h1 {
 									<th>Diferença</th>
 									<th>Variacao</th>
 									<th>% Variacao</th>
+									<th>Conversão</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -141,6 +142,7 @@ body h1 {
 									<td><%=lista.get(i).getDiferenca_maxima_minima()%></td>
 									<td><%=lista.get(i).getVariacao()%></td>
 									<td><%=lista.get(i).getPorcentagem_de_variacao()%></td>
+									<td><%=lista.get(i).getValor_convertido()%></td>
 								</tr>
 								<%
 								}
@@ -151,53 +153,50 @@ body h1 {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-1">
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Franco Suiço</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Peso Argentino</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Euro</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Dolar
-					Comercial</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Dolar
-					Canadense</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Dolar Turismo</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Bitcoin</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Dolar
-					Australiano</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Novo Shekel
-					Israelense</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Iene Japonês</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Libra
-					Esterlina</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Ripple</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Ethereum</button>
-				<button type="button" class="btn btn-default" id="BT"
-					data-toggle="modal" data-target="#modal-xl">Litecoin</button>
+			<div class="col-lg-1" style="left: 400px">
+				<button type="button" value="USD" name="dolar"
+					class="btn btn-default codecoin" id="BT" data-toggle="modal"
+					data-target="#modal-xl">Dólar Americano/Real Brasileiro</button>
+				<button type="button" value="AUD" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Dólar
+					Australiano/Real Brasileiro</button>
+				<button type="button" value="CAD" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Dólar
+					Canadense/Real Brasileiro</button>
+				<button type="button" value="EUR" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Euro/Real
+					Brasileiro</button>
+				<button type="button" value="CHF" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Franco
+					Suíço/Real Brasileiro</button>
+				<button type="button" value="JPY" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Iene
+					Japonês/Real Brasileiro</button>
+				<button type="button" value="GBP" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Libra
+					Esterlina/Real Brasileiro</button>
+				<button type="button" value="ILS" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Novo
+					Shekel Israelense/Real Brasileiro</button>
+				<button type="button" value="ARS" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Peso
+					Argentino/Real Brasileiro</button>
+				<button type="button" value="CNY" class="btn btn-default codecoin"
+					id="BT" data-toggle="modal" data-target="#modal-xl">Yuan
+					Chinês/Real Brasileiro</button>
 			</div>
-
 		</div>
 		<form action="dollar" method="POST">
 			<button class="btn btn-danger" type="submit">Atualizar
 				valores</button>
 		</form>
+
 		<div class="modal fade" id="modal-xl" style="display: none;"
 			aria-hidden="true">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Dólar</h4>
+						<h4 class="modal-title"></h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">×</span>
@@ -214,30 +213,13 @@ body h1 {
 									<th>Venda</th>
 									<th>Maximo</th>
 									<th>Minimo</th>
-									<th>Diferenca_maxima_minima</th>
+									<th>Diferença</th>
 									<th>Variacao</th>
-									<th>Porcentagem_de_variacao</th>
+									<th>% Variacao</th>
+									<th>Conversão</th>
 								</tr>
 							</thead>
-							<tbody>
-								<%
-								for (int i = 0; i < umaMoeda.size(); i++) {
-								%>
-								<tr>
-									<td><%=lista.get(i).getCode()%></td>
-									<td><%=lista.get(i).getName()%></td>
-									<td><%=lista.get(i).getCompra()%></td>
-									<td><%=lista.get(i).getVenda()%></td>
-									<td><%=lista.get(i).getMaximo()%></td>
-									<td><%=lista.get(i).getMinimo()%></td>
-									<td><%=lista.get(i).getDiferenca_maxima_minima()%></td>
-									<td><%=lista.get(i).getVariacao()%></td>
-									<td><%=lista.get(i).getPorcentagem_de_variacao()%></td>
-								</tr>
-								<%
-								}
-								%>
-
+							<tbody 	id="openmodal">
 							</tbody>
 						</table>
 					</div>
@@ -250,15 +232,54 @@ body h1 {
 			<!-- /.modal-dialog -->
 		</div>
 	</div>
-	
 
-<footer class="main-footer">
-    <strong>Copyright © 2021 <a href="https://github.com/GabrielRinaldin/inFomoney"> GitHub</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.1.0
-    </div>
-  </footer>
-	
+
+	<footer class="main-footer">
+		<strong>Copyright © 2021 <a
+			href="https://github.com/GabrielRinaldin/inFomoney"> GitHub</a>.
+		</strong> All rights reserved.
+		<div class="float-right d-none d-sm-inline-block">
+			<b>Version</b> 3.1.0
+		</div>
+	</footer>
+
+	<script>
+		$(document).ready(function() {
+
+			$(".codecoin").click(function() {
+
+				let value = this.getAttribute('value');
+				$("#openmodal").empty();
+				$.ajax({
+					type : "GET",
+					url : "umamoeda",
+					 data: {
+                         'code': value,
+                     },
+					success : function(data) {
+						console.log(data[0].name);
+						$(".modal-title").text(data[0].name)
+						$.each(data, function(i, item) {
+	                        $("#openmodal")
+	                            .append('<tr>')
+	                            .append('<td>' + item.code + '</td>')
+	                            .append('<td>' + item.name + '</td>')
+	                            .append('<td>' + item.compra + '</td>')
+	                            .append('<td>' + item.venda + '</td>')
+	                            .append('<td>' + item.maximo + '</td>')
+	                            .append('<td>' + item.minimo + '</td>')
+	                            .append('<td>' + item.diferenca_maxima_minima + '</td>')
+	                            .append('<td>' + item.variacao + '</td>')
+	                            .append('<td>' + item.porcentagem_de_variacao + '</td>')
+	                            .append('<td>' + item.valor_convertido + '</td>')
+	                            .append('</tr>')
+	                    });
+					}
+				})
+
+			});
+
+		});
+	</script>
 </body>
 </html>
