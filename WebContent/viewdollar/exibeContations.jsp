@@ -29,7 +29,8 @@ ArrayList<Moeda> lista = (ArrayList<Moeda>) request.getAttribute("listaTodas");
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <style type="text/css">
 #content-tabble {
 	border-collapse: collapse;
@@ -222,14 +223,13 @@ body h1 {
 							<tbody 	id="openmodal">
 							</tbody>
 						</table>
+						<div id="drawCurveTypes" style="border: 1px solid #ccc"></div>
 					</div>
 					<div class="modal-footer justify-content-between">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 					</div>
 				</div>
-				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-dialog -->
 		</div>
 	</div>
 
@@ -250,6 +250,7 @@ body h1 {
 
 				let value = this.getAttribute('value');
 				$("#openmodal").empty();
+				$("#drawChartVariacao").empty();
 				$.ajax({
 					type : "GET",
 					url : "umamoeda",
@@ -257,7 +258,6 @@ body h1 {
                          'code': value,
                      },
 					success : function(data) {
-						console.log(data[0].name);
 						$(".modal-title").text(data[0].name)
 						$.each(data, function(i, item) {
 	                        $("#openmodal")
@@ -276,8 +276,51 @@ body h1 {
 	                    });
 					}
 				})
+				
+				
+					$.ajax({
+				type : "GET",
+				url : "umamoeda",
+				data: {
+                    'code': value,
+                },
+				dataTYPE : "JSON",
+				success : function(result) {
+					google.charts.load('current', {
+						'packages' : [ 'corechart' ]
+					});
+					google.charts.setOnLoadCallback(function() {
+						drawCurveTypes(result);
+					});
+				}
+			});
+				function drawCurveTypes(result) {
+					var dataLine = new google.visualization.DataTable();
+					dataLine.addColumn('string', 'Data');
+					dataLine.addColumn('number', 'Variação');
+					var dataArray = [];
+					$.each(result, function(i, obj) {
+						dataArray.push([ obj.data_de_criacao, obj.porcentagem_de_variacao, ]);
+					});
+					dataLine.addRows(dataArray);
+					var options = {
+						width : 1100,
+						height : 500,
+						series : {
+							01 : {
+								curveType : 'function'
+							}
+						}
+					};
+
+					var chart = new google.visualization.LineChart(document
+							.getElementById('drawCurveTypes'));
+					chart.draw(dataLine, options);
+				}
 
 			});
+			
+		
 
 		});
 	</script>

@@ -30,16 +30,13 @@ public class UmaMoeda extends HttpServlet {
 			throws ServletException, IOException {
 
 		String valor = request.getParameter("code");
-//		System.out.println(valor);
-
 		ArrayList<Moeda> umaMoeda = cotationDao.selectOneCotation(valor);
 		request.setAttribute("umaMoeda", umaMoeda);
-
 		Gson gson = new Gson();
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		out.println(gson.toJson(umaMoeda));
-		
+
 	}
 
 }
