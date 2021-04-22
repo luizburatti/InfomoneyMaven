@@ -185,12 +185,14 @@ body h1 {
 				<button type="button" value="CNY" class="btn btn-default codecoin"
 					id="BT" data-toggle="modal" data-target="#modal-xl">Yuan
 					Chinês/Real Brasileiro</button>
+					<form action="dollar" method="POST">
+				<button class="btn btn-danger" type="submit">Atualizar
+					valores</button>
+			</form>
 			</div>
+			
 		</div>
-		<form action="dollar" method="POST">
-			<button class="btn btn-danger" type="submit">Atualizar
-				valores</button>
-		</form>
+
 
 		<div class="modal fade" id="modal-xl" style="display: none;"
 			aria-hidden="true">
@@ -220,7 +222,7 @@ body h1 {
 									<th>Conversão</th>
 								</tr>
 							</thead>
-							<tbody 	id="openmodal">
+							<tbody id="openmodal">
 							</tbody>
 						</table>
 						<div id="drawCurveTypes" style="border: 1px solid #ccc"></div>
@@ -244,85 +246,148 @@ body h1 {
 	</footer>
 
 	<script>
-		$(document).ready(function() {
+		$(document)
+				.ready(
+						function() {
 
-			$(".codecoin").click(function() {
+							$(".codecoin")
+									.click(
+											function() {
 
-				let value = this.getAttribute('value');
-				$("#openmodal").empty();
-				$("#drawChartVariacao").empty();
-				$.ajax({
-					type : "GET",
-					url : "umamoeda",
-					 data: {
-                         'code': value,
-                     },
-					success : function(data) {
-						$(".modal-title").text(data[0].name)
-						$.each(data, function(i, item) {
-	                        $("#openmodal")
-	                            .append('<tr>')
-	                            .append('<td>' + item.code + '</td>')
-	                            .append('<td>' + item.name + '</td>')
-	                            .append('<td>' + item.compra + '</td>')
-	                            .append('<td>' + item.venda + '</td>')
-	                            .append('<td>' + item.maximo + '</td>')
-	                            .append('<td>' + item.minimo + '</td>')
-	                            .append('<td>' + item.diferenca_maxima_minima + '</td>')
-	                            .append('<td>' + item.variacao + '</td>')
-	                            .append('<td>' + item.porcentagem_de_variacao + '</td>')
-	                            .append('<td>' + item.valor_convertido + '</td>')
-	                            .append('</tr>')
-	                    });
-					}
-				})
-				
-				
-					$.ajax({
-				type : "GET",
-				url : "umamoeda",
-				data: {
-                    'code': value,
-                },
-				dataTYPE : "JSON",
-				success : function(result) {
-					google.charts.load('current', {
-						'packages' : [ 'corechart' ]
-					});
-					google.charts.setOnLoadCallback(function() {
-						drawCurveTypes(result);
-					});
-				}
-			});
-				function drawCurveTypes(result) {
-					var dataLine = new google.visualization.DataTable();
-					dataLine.addColumn('string', 'Data');
-					dataLine.addColumn('number', 'Variação');
-					var dataArray = [];
-					$.each(result, function(i, obj) {
-						dataArray.push([ obj.data_de_criacao, obj.porcentagem_de_variacao, ]);
-					});
-					dataLine.addRows(dataArray);
-					var options = {
-						width : 1100,
-						height : 500,
-						series : {
-							01 : {
-								curveType : 'function'
-							}
-						}
-					};
+												let value = this
+														.getAttribute('value');
+												$("#openmodal").empty();
+												$("#drawChartVariacao").empty();
+												$
+														.ajax({
+															type : "GET",
+															url : "umamoeda",
+															data : {
+																'code' : value,
+															},
+															success : function(
+																	data) {
+																$(
+																		".modal-title")
+																		.text(
+																				data[0].name)
+																$
+																		.each(
+																				data,
+																				function(
+																						i,
+																						item) {
+																					$(
+																							"#openmodal")
+																							.append(
+																									'<tr>')
+																							.append(
+																									'<td>'
+																											+ item.code
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.name
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.compra
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.venda
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.maximo
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.minimo
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.diferenca_maxima_minima
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.variacao
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.porcentagem_de_variacao
+																											+ '</td>')
+																							.append(
+																									'<td>'
+																											+ item.valor_convertido
+																											+ '</td>')
+																							.append(
+																									'</tr>')
+																				});
+															}
+														})
 
-					var chart = new google.visualization.LineChart(document
-							.getElementById('drawCurveTypes'));
-					chart.draw(dataLine, options);
-				}
+												$
+														.ajax({
+															type : "GET",
+															url : "umamoeda",
+															data : {
+																'code' : value,
+															},
+															dataTYPE : "JSON",
+															success : function(
+																	result) {
+																google.charts
+																		.load(
+																				'current',
+																				{
+																					'packages' : [ 'corechart' ]
+																				});
+																google.charts
+																		.setOnLoadCallback(function() {
+																			drawCurveTypes(result);
+																		});
+															}
+														});
+												function drawCurveTypes(result) {
+													var dataLine = new google.visualization.DataTable();
+													dataLine.addColumn(
+															'string', 'Data');
+													dataLine.addColumn(
+															'number',
+															'Variação');
+													var dataArray = [];
+													$
+															.each(
+																	result,
+																	function(i,
+																			obj) {
+																		dataArray
+																				.push([
+																						obj.data_de_criacao,
+																						obj.porcentagem_de_variacao, ]);
+																	});
+													dataLine.addRows(dataArray);
+													var options = {
+														width : 1100,
+														height : 500,
+														series : {
+															01 : {
+																curveType : 'function'
+															}
+														}
+													};
 
-			});
-			
-		
+													var chart = new google.visualization.LineChart(
+															document
+																	.getElementById('drawCurveTypes'));
+													chart.draw(dataLine,
+															options);
+												}
 
-		});
+											});
+
+						});
 	</script>
 </body>
 </html>
