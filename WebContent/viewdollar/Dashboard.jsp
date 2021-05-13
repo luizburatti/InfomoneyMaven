@@ -34,7 +34,7 @@
 							'packages' : [ 'corechart' ]
 						});
 						google.charts.setOnLoadCallback(function() {
-							drawChart(result), drawCurveTypes(result),
+							drawChart(result), 
 									drawChartPie(result),
 									drawChartVariacao(result);
 						});
@@ -66,36 +66,6 @@
 					var chart = new google.visualization.ColumnChart(document
 							.getElementById('chart_div'));
 					chart.draw(data, options);
-				}
-
-				function drawCurveTypes(result) {
-					var dataLine = new google.visualization.DataTable();
-					dataLine.addColumn('string', 'Name');
-					dataLine.addColumn('number', 'Compra');
-					var dataArray = [];
-					$.each(result, function(i, obj) {
-						dataArray.push([ obj.name, obj.compra, ]);
-					});
-					dataLine.addRows(dataArray);
-					var options = {
-						width : 1600,
-						height : 500,
-						hAxis : {
-							title : 'Time'
-						},
-						vAxis : {
-							title : 'Popularity'
-						},
-						series : {
-							00 : {
-								curveType : 'function'
-							}
-						}
-					};
-
-					var chart = new google.visualization.LineChart(document
-							.getElementById('drawCurve'));
-					chart.draw(dataLine, options);
 				}
 
 				function drawChartPie(result) {
@@ -169,7 +139,6 @@ body h1 {
 	<h1>Dashboard</h1>
 	<div class="col-lg-12">
 		<div id="chart_div" style="border: 1px solid #ccc"></div>
-		<div id="drawCurve" style="border: 1px solid #ccc"></div>
 		<div id="drawChartPie" style="border: 1px solid #ccc"></div>
 		<div id="drawChartVariacao" style="border: 1px solid #ccc"></div>
 	</div>

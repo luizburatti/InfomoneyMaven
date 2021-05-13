@@ -17,67 +17,81 @@ import com.google.gson.JsonParser;
 import dao.CotationDao;
 import entity.Moeda;
 
-public class PostDollarServelet {
+public class PostDollarServelet implements Runnable {
 
-	public void store() {
+	private String url;
 
-		try {
-			CotationDao cotationDao = new CotationDao();
+	public PostDollarServelet(String url) {
+		this.url = url;
+	}
 
-			String sURL = "https://economia.awesomeapi.com.br/last/USD-BRLT,USD-BRL,CAD-BRL,EUR-BRL,GBP-BRL,ARS-BRL,JPY-BRL,CHF-BRL,AUD-BRL,CNY-BRL,ILS-BRL"; // just a string
+	@Override
+	public void run() {
 
-			// Connect to the URL using java's native library
-			URL url = new URL(sURL);
-			URLConnection json = url.openConnection();
-			json.connect();
+		while (true) {
+			try {
+				String sURL = this.url;
+				URL url = new URL(sURL);
+				URLConnection json = url.openConnection();
+				json.connect();
+				JsonParser jp = new JsonParser();
+				JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent(), "UTF-8"));
+				this.convertToElement(root);
+				System.out.println(Thread.currentThread());
+				Thread.sleep(30000);
 
-			// Convert to a JSON object to print data
-			JsonParser jp = new JsonParser(); // from gson
-			JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent(), "UTF-8")); // Convert the input
-																									// stream
-																									// to a json element
-			JsonObject rootobj = root.getAsJsonObject(); // May be an array, may be an object.
-			JsonElement code = rootobj; // Get value by code name
-
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-			// Convertendo um objeto Java para JSON e retorna uma String JSON formatada.
-			String JsonConvertido = gson.toJson(code);
-
-			JSONObject jsonObjectMoedas = new JSONObject(JsonConvertido);
-
-			List<Moeda> listaDeMoedas = new ArrayList<Moeda>();
-
-			Iterator<String> iteratormoedas = jsonObjectMoedas.keys();
-			while (iteratormoedas.hasNext()) {
-
-				JSONObject dadosMoedas = jsonObjectMoedas.getJSONObject(iteratormoedas.next());
-
-				Moeda moedas = new Moeda();
-				moedas.setCode(dadosMoedas.getString("code"));
-				moedas.setCodein(dadosMoedas.getString("codein"));
-				moedas.setName(dadosMoedas.getString("name"));
-				moedas.setCompra(dadosMoedas.getFloat("bid"));
-				moedas.setVenda(dadosMoedas.getFloat("ask"));
-				moedas.setMaximo(dadosMoedas.getFloat("high"));
-				moedas.setMinimo(dadosMoedas.getFloat("low"));
-				moedas.setDiferenca_maxima_minima(dadosMoedas.getFloat("high") - dadosMoedas.getFloat("low"));
-				moedas.setVariacao(dadosMoedas.getFloat("varBid"));
-				moedas.setPorcentagem_de_variacao(dadosMoedas.getFloat("pctChange"));
-				moedas.setValor_convertido(1 / dadosMoedas.getFloat("bid"));
-				moedas.setData_de_criacao(dadosMoedas.getString("create_date"));
-				
-				
-
-				listaDeMoedas.add(moedas);
-				cotationDao.store(moedas);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		}
-
-		catch (Exception e) {
-			e.printStackTrace();
 		}
 
 	}
 
+	public void convertToElement(JsonElement root) {
+		JsonObject rootobj = root.getAsJsonObject();
+		JsonElement code = rootobj;
+		this.convertToGson(code);
+	}
+
+	private void convertToGson(JsonElement code) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String JsonConvertido = gson.toJson(code);
+		this.convertToJsonObject(JsonConvertido);
+	}
+
+	private void convertToJsonObject(String JsonConvertido) {
+		JSONObject jsonObjectMoedas = new JSONObject(JsonConvertido);
+		this.addToIterator(jsonObjectMoedas);
+	}
+
+	private void addToIterator(JSONObject jsonObjectMoedas) {
+
+		Iterator<String> iteratormoedas = jsonObjectMoedas.keys();
+
+		List<Moeda> listaDeMoedas = new ArrayList<Moeda>();
+
+		CotationDao cotationDao = new CotationDao();
+
+		while (iteratormoedas.hasNext()) {
+			JSONObject dadosMoedas = jsonObjectMoedas.getJSONObject(iteratormoedas.next());
+
+			Moeda moedas = new Moeda();
+			moedas.setCode(dadosMoedas.getString("code"));
+			moedas.setCodein(dadosMoedas.getString("codein"));
+			moedas.setName(dadosMoedas.getString("name"));
+			moedas.setCompra(dadosMoedas.getFloat("bid"));
+			moedas.setVenda(dadosMoedas.getFloat("ask"));
+			moedas.setMaximo(dadosMoedas.getFloat("high"));
+			moedas.setMinimo(dadosMoedas.getFloat("low"));
+			moedas.setDiferenca_maxima_minima(dadosMoedas.getFloat("high") - dadosMoedas.getFloat("low"));
+			moedas.setVariacao(dadosMoedas.getFloat("varBid"));
+			moedas.setPorcentagem_de_variacao(dadosMoedas.getFloat("pctChange"));
+			moedas.setValor_convertido(1 / dadosMoedas.getFloat("bid"));
+			moedas.setData_de_criacao(dadosMoedas.getString("create_date"));
+
+			listaDeMoedas.add(moedas);
+			cotationDao.store(moedas);
+		}
+
+	}
 }

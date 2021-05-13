@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.PostDollarServelet;
 import dao.CotationDao;
 import entity.Moeda;
+import thread.PostThreadMoeda;
 
 
 @WebServlet(name = "dollar", urlPatterns = { "/viewdollar/dollar" })
@@ -37,8 +38,12 @@ public class DollarServlet extends HttpServlet {
 	}	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PostDollarServelet postDollarServelet = new PostDollarServelet();
-		postDollarServelet.store();
+//		PostDollarServelet postDollarServelet = new PostDollarServelet();
+//		postDollarServelet.store();
+		
+		
+		PostThreadMoeda post = new PostThreadMoeda("https://economia.awesomeapi.com.br/last/");
+		post.start();
 
 	}	
 
