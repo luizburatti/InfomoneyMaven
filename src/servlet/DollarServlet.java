@@ -26,7 +26,6 @@ public class DollarServlet extends HttpServlet {
        this.cotationDao = new CotationDao();
     }
     
-//    private static HttpURLConnection connection;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -38,9 +37,6 @@ public class DollarServlet extends HttpServlet {
 	}	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		PostDollarServelet postDollarServelet = new PostDollarServelet();
-//		postDollarServelet.store();
-		
 		
 		PostThreadMoeda post = new PostThreadMoeda("https://economia.awesomeapi.com.br/last/");
 		post.start();

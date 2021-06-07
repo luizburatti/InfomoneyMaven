@@ -1,0 +1,54 @@
+ let getMessageChat = document.querySelector("#message");
+            let codMoeda = null;
+            let startDate = null;
+            let finalDate = null;
+            $("#sendMsg").click(function () {
+              if (getMessageChat.value.length > 0) {
+                $("#messageAtRigth").append(
+                  '<div class="direct-chat-text">' +
+                    getMessageChat.value +
+                    "</div>"
+                );
+                let checkMsg = getMessageChat.value.split(" ");
+                if (checkMsg.length == 3) {
+                  codMoeda = checkMsg[0];
+                  startDate = checkMsg[1];
+                  finalDate = checkMsg[2];
+
+                  $.ajax({
+                    type: "GET",
+                    url: "chatbot",
+                    data: {
+                      codMoeda: codMoeda,
+                      startDate: startDate,
+                      finalDate: finalDate,
+                    },
+                    success: function () {
+                      console.log("teste");
+                    },
+                  });
+                } else {
+                  if (codMoeda == null) {
+                    codMoeda = checkMsg;
+                    checkMsg = null;
+                  }
+                  if (codMoeda != null && startDate == null) {
+                    startDate = checkMsg;
+                    checkMsg = null;
+                  }
+                  if (
+                    codMoeda != null &&
+                    startDate != null &&
+                    finalDate == null
+                  ) {
+                    finalDate = checkMsg;
+                    checkMsg = null;
+                  }
+                }
+
+                getMessageChat.value = null;
+              } else {
+                alert("Você não pode enviar um campo vazio");
+              }
+            });
+          
