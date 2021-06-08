@@ -101,6 +101,10 @@ body h1 {
 							<i class="nav-icon fas fa-home"></i>
 							<p>Dashboard</p>
 					</a></li>
+					<li class="nav-item"><a href="chatbot.jsp" class="nav-link">
+							<i class="nav-icon fas fa-home"></i>
+							<p>Chat</p>
+					</a></li>
 				</ul>
 			</nav>
 		</div>
