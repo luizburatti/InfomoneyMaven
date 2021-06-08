@@ -21,33 +21,17 @@ public class PostDollarServelet implements Runnable {
 
 	private String url;
 	private String nomeThread;
-//	private boolean estaSuspensa;
-//	private boolean terminar;
 
 	public PostDollarServelet(String url, String nomeThread) {
-		this.url = url;	
+		this.url = url;
 		this.nomeThread = nomeThread;
-//		this.estaSuspensa = false;
-	    new Thread(this).start();
-
-//	    Thread t = new Thread(this);
-//	    t.start();
-//	    
-//	    try {
-//			t.join();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		new Thread(this).start();
 	}
 
-
 	@Override
-	public void run() {	
-		
-		System.out.println(this.nomeThread + " Iniciada");
-		
-		synchronized(this) {
+	public void run() {
+
+		synchronized (this) {
 			while (true) {
 				try {
 					String sURL = this.url;
@@ -57,23 +41,13 @@ public class PostDollarServelet implements Runnable {
 					JsonParser jp = new JsonParser();
 					JsonElement root = jp.parse(new InputStreamReader((InputStream) json.getContent(), "UTF-8"));
 					this.convertToElement(root);
-					Thread.sleep(3000);
-//					synchronized (this) {
-//						while(estaSuspensa) {
-//							wait();
-//						}
-//						if(this.terminar) {
-//							break;
-//						}
-//						
-//					}					
-					
+					Thread.sleep(30000);
+
 				} catch (Exception e) {
 					e.printStackTrace();
-				}       	        
+				}
 			}
 		}
-		
 
 	}
 
@@ -104,9 +78,9 @@ public class PostDollarServelet implements Runnable {
 
 		while (iteratormoedas.hasNext()) {
 			JSONObject dadosMoedas = jsonObjectMoedas.getJSONObject(iteratormoedas.next());
-           
+
 			System.out.println("Thread que esta executando: " + Thread.currentThread().getName());
-			
+
 			Moeda moedas = new Moeda();
 			moedas.setCode(dadosMoedas.getString("code"));
 			moedas.setCodein(dadosMoedas.getString("codein"));
@@ -123,21 +97,9 @@ public class PostDollarServelet implements Runnable {
 
 			listaDeMoedas.add(moedas);
 			cotationDao.store(moedas);
-			
-			System.out.println(this.nomeThread + " Finalizada");			
+
+			System.out.println(this.nomeThread + " Finalizada");
 		}
-		
-		
+
 	}
-//	void suspend() {
-//		this.estaSuspensa = true;
-//	}
-//	synchronized void resume() {
-//		this.estaSuspensa = false;
-//		notify();
-//	}
-//	synchronized void stop() {
-//		this.terminar = true;
-//		notify();
-//	}
 }

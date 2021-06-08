@@ -34,6 +34,8 @@ public class DollarServlet extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");
 		rd.forward(request, response);
+		
+		this.doPost(request, response);
 	}	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

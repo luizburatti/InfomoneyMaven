@@ -49,9 +49,8 @@ public class ChatBot {
 
 			respondeMsg = "Compra: " + msgs.getCompra() + " Venda: " + msgs.getVenda() + " Variação: "
 					+ msgs.getPorcentagem_de_variacao() + " Data: " + msgs.getData_de_criacao();
-			
+
 			this.responde(respondeMsg, userSession);
-			
 
 		}
 	}
@@ -65,9 +64,9 @@ public class ChatBot {
 		ArrayList<Moeda> umaMoeda = cotationDao.selectCodeAndDate(code, start, end);
 		return umaMoeda;
 	}
-	
+
 	public synchronized void responde(String msg, Session userSession) {
-		
+
 		try {
 			userSession.getBasicRemote().sendText(msg);
 		} catch (IOException e) {
