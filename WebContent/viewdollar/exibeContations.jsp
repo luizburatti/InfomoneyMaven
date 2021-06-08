@@ -164,7 +164,7 @@ import="java.util.ArrayList"%> <% ArrayList<Moeda>
                   </table>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div
                     class="
                       card card-primary card-outline
@@ -175,8 +175,8 @@ import="java.util.ArrayList"%> <% ArrayList<Moeda>
                       <h3 class="card-title">Direct Chat</h3>
                     </div>
                     <div class="card-body">
-                      <div class="direct-chat-messages">
-                        <div class="direct-chat-msg left" id="messageAtLeft">
+                      <div class="direct-chat-messages" id="newMessage">
+                        <div class="direct-chat-msg right">
                           <div class="direct-chat-text">Seja bem vindo!</div>
                           <div class="direct-chat-text">
                             Se deseja um período específico de uma de nossas
@@ -189,10 +189,7 @@ import="java.util.ArrayList"%> <% ArrayList<Moeda>
                             Respectivamente nessa ordem.
                           </div>
                         </div>
-                        <div
-                          class="direct-chat-msg right"
-                          id="messageAtRigth"
-                        ></div>
+                        
                       </div>
                     </div>
 
@@ -489,12 +486,11 @@ import="java.util.ArrayList"%> <% ArrayList<Moeda>
 
             chatClient = new WebSocket(endPointURL);
             chatClient.onmessage = function (event) {
+            	console.log(event.data);
               //USD 2021-04-20 2021-05-12
-              console.log(event);
-              var jsonObj = JSON.parse(event.data);
-              var message = jsonObj.message + "\r\n";
-              $("#messageAtLeft").append(
-                '<div class="direct-chat-text">' + message + "</div>"
+              $("#newMessage").append(
+            		  '<div class="direct-chat-msg right">'+
+                '<div class="direct-chat-text">' + event.data + "</div>"+"</div>"
               );
             };
 
@@ -503,11 +499,13 @@ import="java.util.ArrayList"%> <% ArrayList<Moeda>
               var message = inputElement.value.trim();
               if (message !== "") {
                 var jsonObj = message;
-                chatClient.send(jsonObj);
                 inputElement.value = "";
-                $("#messageAtRigth").append(
-                  '<div class="direct-chat-text">' + jsonObj + "</div>"
+                $("#newMessage").append(
+                		'<div class="direct-chat-msg left">'+
+                  '<div class="direct-chat-text">' + jsonObj + "</div>"+""
                 );
+                 chatClient.send(jsonObj); 
+                
               }
               inputElement.focus();
             });
