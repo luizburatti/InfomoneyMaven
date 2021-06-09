@@ -45,13 +45,18 @@ public class ChatBot {
 
 		String respondeMsg;
 
-		for (Moeda msgs : msg) {
+		if (msg.size() > 0) {
+			for (Moeda msgs : msg) {
 
-			respondeMsg = "Compra: " + msgs.getCompra() + " Venda: " + msgs.getVenda() + " Variação: "
-					+ msgs.getPorcentagem_de_variacao() + " Data: " + msgs.getData_de_criacao();
+				respondeMsg = "Compra: " + msgs.getCompra() + " Venda: " + msgs.getVenda() + " Variação: "
+						+ msgs.getPorcentagem_de_variacao() + " Data: " + msgs.getData_de_criacao();
 
-			this.responde(respondeMsg, userSession);
+				this.responde(respondeMsg, userSession);
+			}
+		}
 
+		else {
+			this.responde("Não foi encontrado nenhum resultado com os seguintes parâmetros:  " + mensagem, userSession);
 		}
 	}
 
