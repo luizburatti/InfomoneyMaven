@@ -8,11 +8,13 @@ import java.util.ArrayList;
 
 import connection.Dao;
 import entity.Moeda;
+import entity.Request;
 
 public class DashboardDao extends Dao {
 
 	private static final String SELECT = "SELECT * FROM  (SELECT * FROM Moedas ORDER BY ID DESC LIMIT 11) SUB ORDER BY ID ASC";
 	private static final String SELECTCODE_DASH = "SELECT * FROM Moedas WHERE CODE = 'USD' ORDER BY ID ASC";
+	private static final String SELECTCODE_REQUESTS = "SELECT *, COUNT(*) AS request FROM Request GROUP BY code";
 
 	public ArrayList<Moeda> selectAllCotation() {
 
@@ -80,6 +82,31 @@ public class DashboardDao extends Dao {
 		}
 
 		return listOneMoeda;
+
+	}
+
+	public ArrayList<Request> selectRequest() {
+
+		ArrayList<Request> listRequest = new ArrayList<Request>();
+		try (Connection connection = this.conectar();
+				PreparedStatement pst = connection.prepareStatement(SELECTCODE_REQUESTS);) {
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+
+				Request request = new Request();
+				request.setId(rs.getInt("id"));
+				request.setCode(rs.getString("code"));
+				request.setRequest(rs.getInt("request"));
+
+				listRequest.add(request);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listRequest;
 
 	}
 

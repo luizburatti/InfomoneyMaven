@@ -13,15 +13,19 @@ import javax.websocket.OnOpen;
 import javax.websocket.server.ServerEndpoint;
 
 import dao.CotationDao;
+import dao.RequestDao;
 import entity.Moeda;
+import entity.Request;
 
 @ServerEndpoint(value = "/chat")
 public class ChatBot {
 
 	private CotationDao cotationDao;
+	private RequestDao requestDao;
 
 	public ChatBot() {
 		this.cotationDao = new CotationDao();
+		this.requestDao = new RequestDao();
 	}
 
 	Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
@@ -67,7 +71,17 @@ public class ChatBot {
 		String start = separaMessagem[1];
 		String end = separaMessagem[2];
 		ArrayList<Moeda> umaMoeda = cotationDao.selectCodeAndDate(code, start, end);
+
+		this.store(code);
+
 		return umaMoeda;
+	}
+
+	private void store(String code) {
+		Request request = new Request();
+		request.setCode(code);
+		requestDao.store(request);
+
 	}
 
 	public synchronized void responde(String msg, Session userSession) {
