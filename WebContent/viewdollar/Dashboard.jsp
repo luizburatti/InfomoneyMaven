@@ -165,13 +165,7 @@
 			});
 </script>
 
-<style type="text/css">
-body h1 {
-	font-style: italic;
-	color: white;
-	text-align: center;
-}
-</style>
+
 </head>
 <body>
 	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -201,7 +195,7 @@ body h1 {
 	</aside>
 	<div class="container">
 
-			<h1>Dashboard</h1>
+			<h1 style="color: white">Dashboard</h1>
 			<div class="col-12">
 					<div class="row">
 			
