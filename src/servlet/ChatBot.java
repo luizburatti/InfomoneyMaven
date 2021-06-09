@@ -79,7 +79,7 @@ public class ChatBot {
 
 	private void store(String code) {
 		Request request = new Request();
-		request.setCode(code);
+		request.setCode(code.toUpperCase());
 		requestDao.store(request);
 
 	}
