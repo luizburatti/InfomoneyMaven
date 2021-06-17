@@ -1,5 +1,1 @@
-/servlet/
-/controller/
-/dao/
-/thread/
-/entity/
+/connection/

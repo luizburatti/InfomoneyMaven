@@ -1,8 +1,8 @@
 package entity;
 
-import lombok.Data;
 
-@Data
+
+
 public class Moeda {
 
 	// VARIAVEIS QUE IRAO ARMAZENAR OS DADOS DO ARQUIVO JSON.

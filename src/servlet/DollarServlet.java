@@ -10,39 +10,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.PostDollarServelet;
 import dao.CotationDao;
 import entity.Moeda;
 import thread.PostThreadMoeda;
 
-
 @WebServlet(name = "dollar", urlPatterns = { "/viewdollar/dollar" })
 public class DollarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       	
+
 	private CotationDao cotationDao;
-	
-    public DollarServlet() {
-       this.cotationDao = new CotationDao();
-    }
-    
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	public DollarServlet() {
+		this.cotationDao = new CotationDao();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		ArrayList<Moeda> lista = cotationDao.selectAllCotation();
 		request.setAttribute("listaTodas", lista);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/viewdollar/exibeContations.jsp");
 		rd.forward(request, response);
-		
-		this.doPost(request, response);
-	}	
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		this.doPost(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		PostThreadMoeda post = new PostThreadMoeda("https://economia.awesomeapi.com.br/last/");
 		post.start();
 
-	}	
+	}
 
 }
