@@ -35,7 +35,7 @@ public class CreateUser extends HttpServlet {
 		String cpf = request.getParameter("cpf");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
-		
+
 		Users user = new Users();
 		user.setNome(name);
 		user.setCpf(cpf);
@@ -43,15 +43,19 @@ public class CreateUser extends HttpServlet {
 		user.setEmail(email);
 
 		userdao.store(user);
+
+		// Set response content type
+		response.setContentType("text/html");
+
+		// New location to be redirected
+		String site = new String("http://localhost:8080/infomoney/user/login3.0.jsp");
+
+		response.setStatus(response.SC_MOVED_TEMPORARILY);
+		response.setHeader("Location", site);
 		
-		   // Set response content type
-	      response.setContentType("text/html");
-
-	      // New location to be redirected
-	      String site = new String("http://localhost:8080/infomoney/user/login.jsp");
-
-	      response.setStatus(response.SC_MOVED_TEMPORARILY);
-	      response.setHeader("Location", site); 
+		
+		
+		
 		
 
 	}
